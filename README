@@ -1,0 +1,27 @@
+SimpleNotepad
+-------------
+
+SimpleNotepad is minimalistic notepad for the Android system.
+Lack of candy animations/graphic makes it fast and lightweight.
+
+SimpleNotepad is licensed under the terms of 2-clause BSD Licence.
+
+
+
+Works on
+--------
+
+It has been tested on:
+ - Samsung Galaxy 3 (i5800) on Android 2.2 (XWJPF)
+ - Android emulator on Android 2.1-update1
+
+
+Known issues
+------------
+ - ContextMenu works only on notes with URL text
+
+
+Contact
+-------
+
+Feel free to email if you find a bug: patseb at gmail dot com

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <LinearLayout android:id="@+id/linearLayout1" android:orientation="vertical" android:paddingBottom="10px" android:paddingLeft="10px" android:paddingRight="10px" android:paddingTop="10px" android:clickable="true" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <Button android:layout_alignParentLeft="true" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/listItemEditButton" android:layout_marginRight="5px" android:text="@string/listitem_edit"></Button>
+            <TextView android:text="TextView" android:layout_height="wrap_content" android:id="@+id/listItemCreationDateTextView" android:layout_width="wrap_content" android:layout_toRightOf="@+id/listItemEditButton" android:layout_alignTop="@+id/listItemEditButton" android:layout_alignBottom="@+id/listItemEditButton" android:gravity="center_vertical"></TextView>
+            <Button android:layout_alignParentRight="true" android:id="@+id/listItemDeleteButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5px" android:text="@string/listitem_delete"></Button>
+            <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_toLeftOf="@+id/listItemDeleteButton" android:layout_alignTop="@+id/listItemDeleteButton" android:layout_alignBottom="@+id/listItemDeleteButton" android:id="@+id/listItemCreationTimeTextView" android:gravity="center_vertical"></TextView>
+        </RelativeLayout>
+        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="match_parent">
+            <TextView android:text="TextView" android:id="@+id/listItemContentTextView" android:textSize="20sp" android:textColor="@color/listitem_textcolor" android:autoLink="web" android:textColorLink="@color/listitem_linkcolor" android:layout_width="match_parent" android:layout_height="match_parent"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

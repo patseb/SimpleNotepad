@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleNotepad</string>
+    <string name="main_create">Create new note</string>
+    <string name="listitem_edit">E</string>
+    <string name="listitem_delete">X</string>
+    <string name="err_not_mounted">External storage not mounted</string>
+    <string name="editenote_save">Save</string>
+    <string name="editenote_cancel">Cancel</string>
+    <string name="err_cant_notes">Can\'t create &quot;Notes&quot; directory</string>
+    <string name="err_cant_note">Can\'t create note file</string>
+    <string name="err_delete">Unable to delete note files</string>
+    <string name="err_read">Notes read error</string>
+    <string name="err_creation">Unable to create note</string>
+    <string name="dialog_title">Delete confirm</string>
+    <string name="dialog_question">Are you sure?</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <color name="listitem_textcolor">#FFFFFF</color>
+    <color name="listitem_linkcolor">#99CCFF</color>
+    <string name="contextmenu_copy">Copy text</string>
+    <string name="contextmenu_title">What to do...</string>
+</resources>
