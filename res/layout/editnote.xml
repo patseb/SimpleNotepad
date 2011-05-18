@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_weight="1.0">
-        <EditText android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/editNoteContentEditText" android:gravity="top|left"></EditText>
-    </LinearLayout>
-    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="match_parent" android:baselineAligned="false">
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/editNoteSaveButton" android:text="@string/editenote_save"></Button>
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/editNoteCancelButton" android:text="@string/editenote_cancel"></Button>
-    </LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:orientation="vertical">
+	<LinearLayout android:layout_height="wrap_content"
+		android:id="@+id/linearLayout1" android:layout_width="match_parent"
+		android:layout_weight="1.0">
+		<EditText android:layout_width="match_parent"
+			android:layout_height="match_parent" android:id="@+id/editNoteContentEditText"
+			android:gravity="top|left"></EditText>
+	</LinearLayout>
+	<LinearLayout android:layout_height="wrap_content"
+		android:id="@+id/linearLayout2" android:layout_width="match_parent"
+		android:baselineAligned="false">
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_weight="1"
+			android:id="@+id/editNoteSaveButton" android:text="@string/editenote_save"></Button>
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_weight="1"
+			android:id="@+id/editNoteCancelButton" android:text="@string/editenote_cancel"></Button>
+	</LinearLayout>
 </LinearLayout>
