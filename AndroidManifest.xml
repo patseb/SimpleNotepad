@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.patrykkwiatkowski.simplenotepad"
-      android:versionCode="1"
-      android:versionName="1.0" android:installLocation="internalOnly" xmlns:android="http://schemas.android.com/apk/res/android">
+      android:versionCode="2"
+      android:versionName="1.0.1" android:installLocation="internalOnly" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:targetSdkVersion="8" android:minSdkVersion="8"></uses-sdk>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
