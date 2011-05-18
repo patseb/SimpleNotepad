@@ -16,8 +16,10 @@
     <string name="dialog_question">Are you sure?</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
-    <color name="listitem_textcolor">#FFFFFF</color>
-    <color name="listitem_linkcolor">#99CCFF</color>
     <string name="contextmenu_copy">Copy text</string>
     <string name="contextmenu_title">What to do...</string>
+    <color name="listitem_textcolor">#FFFFFF</color>
+    <color name="listitem_linkcolor">#99CCFF</color>
+    <color name="listitem_selected">#1E90FF</color>
+    <color name="listitem_normal">#000000</color>
 </resources>
