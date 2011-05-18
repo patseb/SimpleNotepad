@@ -27,9 +27,7 @@
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:focusable="false"></TextView>
 	</RelativeLayout>
-	<TextView android:textSize="20sp" android:layout_height="wrap_content"
-		android:id="@+id/listItemContentTextView" android:layout_width="wrap_content"
-		android:textColorLink="@color/listitem_linkcolor" android:text="TextView"
+	<TextView android:textSize="20sp" android:id="@+id/listItemContentTextView" android:textColorLink="@color/listitem_linkcolor" android:text="TextView"
 		android:textColor="@color/listitem_textcolor" android:focusable="false"
-		android:layout_marginLeft="5px" android:clickable="false"></TextView>
+		android:layout_marginLeft="5px" android:clickable="false" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginRight="5px"></TextView>
 </LinearLayout>
