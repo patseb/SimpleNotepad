@@ -79,6 +79,17 @@ public class Main extends Activity {
 						return true;
 					}
 				});
+		
+		menu.add(R.string.contextmenu_show).setOnMenuItemClickListener(
+				new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						Intent intent = new Intent(Main.this, NoteViewer.class);
+						intent.putExtra("note", selectedNote);
+						startActivity(intent);
+						return true;
+					}
+				});
 	}
 
 	@Override

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:padding="5px" android:orientation="vertical">
+	<RelativeLayout android:id="@+id/relativeLayout1"
+		android:layout_width="match_parent" android:layout_height="wrap_content">
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="TextView"
+			android:layout_alignParentLeft="true" android:id="@+id/viewNoteDateTextView"></TextView>
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_alignParentRight="true"
+			android:text="TextView" android:id="@+id/viewNoteTimeTextView"></TextView>
+	</RelativeLayout>
+	<ScrollView android:id="@+id/scrollView1"
+		android:layout_weight="1" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:layout_marginBottom="8px"
+		android:layout_marginLeft="5px" android:layout_marginRight="5px"
+		android:layout_marginTop="5px">
+		<TextView android:textColorLink="@color/listitem_linkcolor"
+			android:autoLink="web" android:textSize="25sp" android:textColor="@color/listitem_textcolor"
+			android:id="@+id/viewNoteContentTextView" android:text="TextView"
+			android:layout_height="match_parent" android:layout_width="match_parent"></TextView>
+	</ScrollView>
+	<Button android:id="@+id/viewNoteCloseButton"
+		android:layout_height="wrap_content" android:layout_width="match_parent"
+		android:layout_weight="0" android:text="@string/viewnote_close"></Button>
+</LinearLayout>
