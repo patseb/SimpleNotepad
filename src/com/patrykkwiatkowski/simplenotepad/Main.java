@@ -65,7 +65,7 @@ public class Main extends Activity {
 	}
 
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {		
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
 		selectedNote = (Note) notesListView.getItemAtPosition(info.position);
 
@@ -76,7 +76,8 @@ public class Main extends Activity {
 					public boolean onMenuItemClick(MenuItem item) {
 						ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 						clipboardManager.setText(selectedNote.getTextContent());
-						return true;					}
+						return true;
+					}
 				});
 	}
 
