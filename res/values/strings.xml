@@ -4,6 +4,7 @@
     <string name="main_create">Create new note</string>
     <string name="listitem_edit">E</string>
     <string name="listitem_delete">X</string>
+    <string name="listitem_collapse">...</string>
     <string name="err_not_mounted">External storage not mounted</string>
     <string name="editenote_save">Save</string>
     <string name="editenote_cancel">Cancel</string>

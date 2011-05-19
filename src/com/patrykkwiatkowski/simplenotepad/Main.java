@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.ClipboardManager;
+import android.text.Layout;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -17,9 +18,12 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -61,6 +65,21 @@ public class Main extends Activity {
 
 		notesListView = (ListView) findViewById(R.id.mainNotesListView);
 		notesListView.setAdapter(new MainNoteAdapter(this, notes));
+		notesListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				selectedNote = (Note) notesListView.getItemAtPosition(position);
+
+				if (selectedNote.getCollapsed() == 1) {
+					notes.get(notes.indexOf(selectedNote)).setCollapsed(0);
+				}
+				else {
+					notes.get(notes.indexOf(selectedNote)).setCollapsed(1);
+				}
+
+				((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+			}
+		});
 		registerForContextMenu(notesListView);
 	}
 
@@ -129,6 +148,23 @@ public class Main extends Activity {
 			if (v != null) {
 				if (position >= 0 && position < notes.size()) {
 					Note note = notes.get(position);
+
+					TextView collapse = (TextView) v.findViewById(R.id.listItemCollapseTextView);
+					TextView content = (TextView) v.findViewById(R.id.listItemContentTextView);
+					Layout l = content.getLayout();
+
+					if ( l != null) {
+						if (note.getCollapsed() == 1) {
+							collapse.setVisibility(View.VISIBLE);
+							if (l.getLineCount() > 2) {
+								content.setMaxLines(1);
+							}
+						}
+						else {
+							collapse.setVisibility(View.INVISIBLE);
+							content.setMaxLines(l.getLineCount());
+						}
+					}
 
 					Button edit = (Button) v.findViewById(R.id.listItemEditButton);
 					edit.setTag(note);
