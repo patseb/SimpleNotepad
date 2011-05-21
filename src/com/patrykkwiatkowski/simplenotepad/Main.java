@@ -156,7 +156,7 @@ public class Main extends Activity {
 					if ( l != null) {
 						if (note.getCollapsed() == 1) {
 							collapse.setVisibility(View.VISIBLE);
-							if (l.getLineCount() > 2) {
+							if (l.getLineCount() > 1) {
 								content.setMaxLines(1);
 							}
 						}
