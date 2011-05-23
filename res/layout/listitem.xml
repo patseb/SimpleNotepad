@@ -3,9 +3,8 @@
 	android:orientation="vertical" android:layout_width="match_parent"
 	android:layout_height="match_parent" android:background="@drawable/listitem_selector"
 	android:paddingBottom="5px">
-	<RelativeLayout android:layout_marginBottom="2px"
-		android:id="@+id/relativeLayout1" android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+	<RelativeLayout android:id="@+id/relativeLayout1"
+		android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="3">
 		<Button android:layout_width="wrap_content" android:focusable="false"
 			android:id="@+id/listItemEditButton" android:layout_alignParentLeft="true"
 			android:layout_height="wrap_content" android:text="@string/listitem_edit"
@@ -26,6 +25,7 @@
 			android:layout_alignTop="@+id/listItemDeleteButton" android:text="TextView"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:focusable="false"></TextView>
+		<TextView android:layout_marginLeft="5px" android:layout_marginRight="5px" android:layout_height="wrap_content" android:id="@+id/listItemCollapseTextView" android:layout_width="wrap_content" android:layout_marginBottom="2px" android:gravity="center" android:text="@string/listitem_collapse" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:layout_alignParentRight="true"></TextView>
 	</RelativeLayout>
 	<TextView android:textColorLink="@color/listitem_linkcolor"
 		android:text="TextView" android:textColor="@color/listitem_textcolor"
@@ -33,9 +33,5 @@
 		android:focusable="false" android:textSize="20sp"
 		android:id="@+id/listItemContentTextView" android:clickable="false"
 		android:layout_width="match_parent" android:layout_height="match_parent"
-		android:layout_weight="1" android:maxLines="1"></TextView>
-	<TextView android:layout_height="wrap_content"
-		android:layout_marginLeft="5px" android:layout_marginRight="5px"
-		android:layout_width="wrap_content" android:layout_gravity="center"
-		android:id="@+id/listItemCollapseTextView" android:text="@string/listitem_collapse"></TextView>
+		android:layout_weight="1" android:maxLines="1" android:layout_marginTop="10px"></TextView>
 </LinearLayout>
