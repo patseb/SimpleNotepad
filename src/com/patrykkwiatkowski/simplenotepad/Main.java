@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.text.Layout;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -109,6 +110,35 @@ public class Main extends Activity {
 						return true;
 					}
 				});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+
+		menu.add(R.string.optionmenu_collapse).setOnMenuItemClickListener(
+				new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						for (int i=0; i<notes.size(); ++i)
+							notes.get(i).setCollapsed(1);
+						((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+						return true;
+					}
+				});
+
+		menu.add(R.string.optionmenu_expand).setOnMenuItemClickListener(
+				new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						for (int i=0; i<notes.size(); ++i)
+							notes.get(i).setCollapsed(0);
+						((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+						return true;
+					}
+				});
+
+		return true;
 	}
 
 	@Override

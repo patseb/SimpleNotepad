@@ -21,6 +21,8 @@
     <string name="contextmenu_copy">Copy text</string>
     <string name="contextmenu_show">Show note</string>
     <string name="contextmenu_title">What to do...</string>
+    <string name="optionmenu_collapse">Fold all</string>
+    <string name="optionmenu_expand">Unfold all</string>
     <color name="listitem_textcolor">#FFFFFF</color>
     <color name="listitem_linkcolor">#99CCFF</color>
     <color name="listitem_selected">#1E90FF</color>
