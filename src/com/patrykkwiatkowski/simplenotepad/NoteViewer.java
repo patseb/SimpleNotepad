@@ -13,7 +13,6 @@ public class NoteViewer extends Activity {
 	private TextView contentTextView;
 	private TextView dateTextView;
 	private TextView timeTextView;
-	private Button closeButton;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -31,13 +30,5 @@ public class NoteViewer extends Activity {
 		contentTextView.setText(note.getTextContent());
 		dateTextView.setText(new SimpleDateFormat("yyyy-MM-dd").format(note.getCreationDate()));
 		timeTextView.setText(new SimpleDateFormat("kk:mm:ss").format(note.getCreationDate()));
-
-		closeButton = (Button) findViewById(R.id.viewNoteCloseButton);
-		closeButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
 	}
 }

@@ -21,7 +21,4 @@
 			android:id="@+id/viewNoteContentTextView" android:text="TextView"
 			android:layout_height="match_parent" android:layout_width="match_parent"></TextView>
 	</ScrollView>
-	<Button android:id="@+id/viewNoteCloseButton"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:layout_weight="0" android:text="@string/viewnote_close"></Button>
 </LinearLayout>
