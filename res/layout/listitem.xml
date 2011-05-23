@@ -5,19 +5,19 @@
 	android:paddingBottom="10dip">
 	<RelativeLayout android:id="@+id/relativeLayout1"
 		android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="3">
-		<Button android:layout_width="wrap_content" android:focusable="false"
+		<Button android:focusable="false"
 			android:id="@+id/listItemEditButton" android:layout_alignParentLeft="true"
-			android:layout_height="wrap_content" android:text="@string/listitem_edit" android:layout_marginRight="10dip"></Button>
+			android:text="@string/listitem_edit" android:layout_marginRight="10dip" android:layout_centerVertical="true" android:layout_height="40dip" android:layout_width="40dip"></Button>
 		<TextView android:layout_toRightOf="@+id/listItemEditButton"
 			android:id="@+id/listItemCreationDateTextView" android:layout_width="wrap_content"
 			android:gravity="center_vertical" android:layout_alignBottom="@+id/listItemEditButton"
 			android:layout_alignTop="@+id/listItemEditButton"
 			android:layout_height="wrap_content" android:text="TextView"
 			android:focusable="false"></TextView>
-		<Button android:layout_width="wrap_content" android:focusable="false"
+		<Button android:focusable="false"
 			android:id="@+id/listItemDeleteButton" android:layout_marginLeft="10dip"
-			android:layout_height="wrap_content" android:text="@string/listitem_delete"
-			android:layout_alignParentRight="true"></Button>
+			android:text="@string/listitem_delete"
+			android:layout_alignParentRight="true" android:layout_width="40dip" android:layout_height="40dip" android:layout_centerVertical="true"></Button>
 		<TextView android:id="@+id/listItemCreationTimeTextView"
 			android:layout_toLeftOf="@+id/listItemDeleteButton" android:gravity="center_vertical"
 			android:layout_alignBottom="@+id/listItemDeleteButton"
