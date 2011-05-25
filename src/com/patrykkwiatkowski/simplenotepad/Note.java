@@ -7,10 +7,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Note implements Parcelable {
-	private static int nextId = 0;
 	private static String dateFormat = "yyyy-MM-dd kk:mm:ss";
 
-	private int id; // wonder if need, creationDate is also unique
 	private Date creationDate;
 	private String textContent;
 
@@ -34,28 +32,24 @@ public class Note implements Parcelable {
 	};
 
 	public Note() {
-		id = nextId++;
 		creationDate = new Date();
 		textContent = "";
 		collapsed = 1;
 	}
 
 	public Note(String text) {
-		id = nextId++;
 		creationDate = new Date();
 		textContent = text;
 		collapsed = 1;
 	}
 
 	public Note(String text, Date date) {
-		id = nextId++;
 		creationDate = date;
 		textContent = text;
 		collapsed = 1;
 	}
 
 	protected Note(Parcel in) {
-		id = in.readInt();
 		collapsed = in.readInt();
 
 		String date_str = in.readString();
@@ -66,10 +60,6 @@ public class Note implements Parcelable {
 		}
 
 		textContent = in.readString();
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public Date getCreationDate() {
@@ -99,7 +89,6 @@ public class Note implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel out, int flags) {
-		out.writeInt(id);
 		out.writeInt(collapsed);
 		out.writeString(new SimpleDateFormat(dateFormat).format(creationDate));
 		out.writeString(textContent);
@@ -107,11 +96,11 @@ public class Note implements Parcelable {
 
 	@Override
 	public boolean equals(Object o) {
-		return (o instanceof Note) && ((Note) o).id == this.id;
+		return (o instanceof Note) && ((Note) o).creationDate.equals(this.creationDate);
 	}
 
 	public static boolean equals(Note a, Note b) {
-		return a != null && b != null && a.getId() == b.getId();
+		return a != null && b != null && a.creationDate.equals(b.creationDate);
 	}
 
 }

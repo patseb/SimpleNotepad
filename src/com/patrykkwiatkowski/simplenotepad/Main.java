@@ -37,6 +37,7 @@ public class Main extends Activity {
 	private ListView notesListView;
 	private ArrayList<Note> notes;
 	private Note selectedNote;
+	private ApplicationController AC;
 	public static final int noteEditorRequest = 1;
 	public static final int noteCreateReqeust = 2;
 
@@ -46,7 +47,9 @@ public class Main extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		notes = NoteFileAdapter.getNotes();
+		AC = (ApplicationController)getApplicationContext();
+		notes = AC.getNotes();
+
 		selectedNote = null;
 
 		if (notes == null) {
@@ -77,7 +80,7 @@ public class Main extends Activity {
 				else {
 					notes.get(notes.indexOf(selectedNote)).setCollapsed(1);
 				}
-
+				AC.setNotes(notes);
 				((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
 			}
 		});
@@ -122,6 +125,7 @@ public class Main extends Activity {
 					public boolean onMenuItemClick(MenuItem item) {
 						for (int i=0; i<notes.size(); ++i)
 							notes.get(i).setCollapsed(1);
+						AC.setNotes(notes);
 						((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
 						return true;
 					}
@@ -133,6 +137,7 @@ public class Main extends Activity {
 					public boolean onMenuItemClick(MenuItem item) {
 						for (int i=0; i<notes.size(); ++i)
 							notes.get(i).setCollapsed(0);
+						AC.setNotes(notes);
 						((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
 						return true;
 					}
@@ -150,6 +155,7 @@ public class Main extends Activity {
 				if (resultCode == Activity.RESULT_OK) {
 					Note note = (Note) data.getParcelableExtra("note");
 					notes.add(0, note);
+					AC.setNotes(notes);
 					((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
 				}
 			}
@@ -159,6 +165,7 @@ public class Main extends Activity {
 				if (resultCode == Activity.RESULT_OK) {
 					Note note = data.getParcelableExtra("note");
 					notes.get(notes.indexOf(note)).setTextContent(note.getTextContent());
+					AC.setNotes(notes);
 					((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
 				}
 			}

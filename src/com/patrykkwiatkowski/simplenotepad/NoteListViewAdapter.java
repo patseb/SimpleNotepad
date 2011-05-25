@@ -37,7 +37,7 @@ public class NoteListViewAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return notes.get(position).getId();
+		return notes.get(position).getCreationDate().hashCode();
 	}
 
 	@Override
