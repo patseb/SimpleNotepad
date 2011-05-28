@@ -10,12 +10,7 @@ public class ApplicationController extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
-		setNotes(NoteFileAdapter.getNotes());
-	}
-
-	public void setNotes(ArrayList<Note> notes) {
-		this.notes = notes;
+		this.notes = NoteFileAdapter.getNotes();
 	}
 
 	public ArrayList<Note> getNotes() {
