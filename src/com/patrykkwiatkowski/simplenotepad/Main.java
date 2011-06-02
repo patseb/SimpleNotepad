@@ -80,7 +80,7 @@ public class Main extends Activity {
 				else {
 					notes.get(notes.indexOf(selectedNote)).setCollapsed(1);
 				}
-				((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+				((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
 			}
 		});
 		registerForContextMenu(notesListView);
@@ -165,7 +165,7 @@ public class Main extends Activity {
 					public boolean onMenuItemClick(MenuItem item) {
 						for (int i=0; i<notes.size(); ++i)
 							notes.get(i).setCollapsed(1);
-						((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+						((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
 						return true;
 					}
 				});
@@ -176,7 +176,7 @@ public class Main extends Activity {
 					public boolean onMenuItemClick(MenuItem item) {
 						for (int i=0; i<notes.size(); ++i)
 							notes.get(i).setCollapsed(0);
-						((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+						((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
 						return true;
 					}
 				});
@@ -193,7 +193,7 @@ public class Main extends Activity {
 				if (resultCode == Activity.RESULT_OK) {
 					Note note = (Note) data.getParcelableExtra("note");
 					notes.add(0, note);
-					((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+					((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
 				}
 			}
 			break;
@@ -202,7 +202,7 @@ public class Main extends Activity {
 				if (resultCode == Activity.RESULT_OK) {
 					Note note = data.getParcelableExtra("note");
 					notes.get(notes.indexOf(note)).setTextContent(note.getTextContent());
-					((MainNoteAdapter) notesListView.getAdapter()).setItems(notes);
+					((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
 				}
 			}
 			break;
