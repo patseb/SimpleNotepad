@@ -8,6 +8,5 @@
 		android:textSize="20dip"></Button>
 	<ListView android:layout_width="match_parent"
 		android:layout_height="match_parent" android:id="@+id/mainNotesListView"
-		android:layout_marginLeft="10dip" android:layout_marginRight="10dip"
 		android:layout_margin="0px"></ListView>
 </LinearLayout>
