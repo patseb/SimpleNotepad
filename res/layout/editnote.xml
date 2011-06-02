@@ -14,9 +14,11 @@
 		android:baselineAligned="false" android:layout_weight="0">
 		<Button android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_weight="1"
-			android:id="@+id/editNoteSaveButton" android:text="@string/editenote_save"></Button>
+			android:id="@+id/editNoteSaveButton" android:text="@string/editenote_save"
+			android:background="@drawable/button_selector" android:textColor="@color/listitem_linkcolor"></Button>
 		<Button android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_weight="1"
-			android:id="@+id/editNoteCancelButton" android:text="@string/editenote_cancel"></Button>
+			android:id="@+id/editNoteCancelButton" android:text="@string/editenote_cancel"
+			android:background="@drawable/button_selector" android:textColor="@color/listitem_linkcolor"></Button>
 	</LinearLayout>
 </LinearLayout>

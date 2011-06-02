@@ -3,7 +3,9 @@
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical">
 	<Button android:layout_height="wrap_content" android:id="@+id/mainCreateButton"
-		android:text="@string/main_create" android:layout_width="fill_parent"></Button>
+		android:text="@string/main_create" android:layout_width="fill_parent"
+		android:background="@drawable/button_selector" android:textColor="@color/listitem_linkcolor"
+		android:textSize="20dip"></Button>
 	<ListView android:layout_width="match_parent"
 		android:layout_height="match_parent" android:id="@+id/mainNotesListView"
 		android:layout_marginLeft="10dip" android:layout_marginRight="10dip"
