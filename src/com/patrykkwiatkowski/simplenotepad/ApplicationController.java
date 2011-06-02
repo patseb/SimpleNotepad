@@ -6,7 +6,7 @@ import android.app.Application;
 
 public class ApplicationController extends Application {
 	private ArrayList<Note> notes;
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();

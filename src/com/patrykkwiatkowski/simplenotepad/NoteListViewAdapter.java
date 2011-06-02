@@ -54,7 +54,6 @@ public class NoteListViewAdapter extends BaseAdapter {
 			TextView time = (TextView) v.findViewById(R.id.listItemCreationTimeTextView);
 			TextView content = (TextView) v.findViewById(R.id.listItemContentTextView);
 			TextView collapse = (TextView) v.findViewById(R.id.listItemCollapseTextView);
-			//Layout l = content.getLayout();
 
 			date.setText(new SimpleDateFormat("yyyy.MM.dd").format(note.getCreationDate()));
 			time.setText(new SimpleDateFormat("kk:mm:ss").format(note.getCreationDate()));
