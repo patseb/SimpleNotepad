@@ -91,7 +91,6 @@ public class Main extends Activity {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
 		selectedNote = (Note) notesListView.getItemAtPosition(info.position);
 
-		menu.setHeaderTitle(R.string.contextmenu_title);
 		menu.add(R.string.contextmenu_copy).setOnMenuItemClickListener(
 				new OnMenuItemClickListener() {
 					@Override
