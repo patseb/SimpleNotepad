@@ -6,5 +6,6 @@
 		android:text="@string/main_create" android:layout_width="fill_parent"></Button>
 	<ListView android:layout_width="match_parent"
 		android:layout_height="match_parent" android:id="@+id/mainNotesListView"
-		android:layout_marginLeft="10dip" android:layout_marginRight="10dip"></ListView>
+		android:layout_marginLeft="10dip" android:layout_marginRight="10dip"
+		android:layout_margin="0px"></ListView>
 </LinearLayout>

@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:background="@drawable/listitem_selector"
-	android:paddingBottom="10dip">
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:background="@drawable/listitem_selector" android:paddingTop="4dip"
+	android:paddingBottom="4dip" android:orientation="vertical">
 	<RelativeLayout android:id="@+id/relativeLayout1"
-		android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="3">
-		<Button android:focusable="false"
-			android:id="@+id/listItemEditButton" android:layout_alignParentLeft="true"
-			android:text="@string/listitem_edit" android:layout_marginRight="10dip" android:layout_centerVertical="true" android:layout_height="40dip" android:layout_width="40dip"></Button>
+		android:layout_width="match_parent" android:layout_height="wrap_content">
 		<TextView android:layout_toRightOf="@+id/listItemEditButton"
 			android:id="@+id/listItemCreationDateTextView" android:layout_width="wrap_content"
-			android:gravity="center_vertical" android:layout_alignBottom="@+id/listItemEditButton"
-			android:layout_alignTop="@+id/listItemEditButton"
-			android:layout_height="wrap_content" android:text="TextView"
-			android:focusable="false"></TextView>
-		<Button android:focusable="false"
-			android:id="@+id/listItemDeleteButton" android:layout_marginLeft="10dip"
-			android:text="@string/listitem_delete"
-			android:layout_alignParentRight="true" android:layout_width="40dip" android:layout_height="40dip" android:layout_centerVertical="true"></Button>
+			android:gravity="center_vertical" android:layout_height="wrap_content"
+			android:text="TextView" android:focusable="false"
+			android:layout_alignParentLeft="true"></TextView>
 		<TextView android:id="@+id/listItemCreationTimeTextView"
 			android:layout_toLeftOf="@+id/listItemDeleteButton" android:gravity="center_vertical"
-			android:layout_alignBottom="@+id/listItemDeleteButton"
-			android:layout_alignTop="@+id/listItemDeleteButton" android:text="TextView"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:focusable="false"></TextView>
-		<TextView android:layout_marginLeft="10dip" android:layout_marginRight="10dip" android:layout_height="wrap_content" android:id="@+id/listItemCollapseTextView" android:layout_width="wrap_content" android:layout_marginBottom="2px" android:gravity="center" android:text="@string/listitem_collapse" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:layout_alignParentRight="true"></TextView>
+			android:text="TextView" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:focusable="false"
+			android:layout_alignParentRight="true"></TextView>
 	</RelativeLayout>
-	<TextView android:textColorLink="@color/listitem_linkcolor"
-		android:text="TextView" android:textColor="@color/listitem_textcolor"
-		android:focusable="false" android:textSize="20sp"
-		android:id="@+id/listItemContentTextView" android:clickable="false"
-		android:layout_width="match_parent" android:layout_height="match_parent"
-		android:layout_weight="1" android:maxLines="1" android:layout_marginLeft="10dip" android:layout_marginRight="10dip" android:layout_marginTop="10dip"></TextView>
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_height="match_parent" android:layout_width="match_parent">
+		<TextView android:textColorLink="@color/listitem_linkcolor"
+			android:text="TextView" android:textColor="@color/listitem_textcolor"
+			android:focusable="false" android:textSize="20sp"
+			android:id="@+id/listItemContentTextView" android:clickable="false"
+			android:layout_width="match_parent" android:layout_height="match_parent"
+			android:layout_weight="1" android:maxLines="1"
+			android:layout_marginLeft="10dip" android:layout_marginRight="10dip"
+			android:layout_marginTop="10dip" android:layout_margin="0px"></TextView>
+		<TextView android:layout_marginLeft="10dip"
+			android:layout_marginRight="10dip" android:id="@+id/listItemCollapseTextView"
+			android:layout_width="wrap_content" android:layout_marginBottom="2px"
+			android:gravity="center" android:text="@string/listitem_collapse"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true" android:layout_height="match_parent"
+			android:layout_margin="0px"></TextView>
+	</LinearLayout>
 </LinearLayout>

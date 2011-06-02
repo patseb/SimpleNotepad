@@ -112,6 +112,47 @@ public class Main extends Activity {
 						return true;
 					}
 				});
+
+		menu.add(R.string.contextmenu_delete).setOnMenuItemClickListener(
+				new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						new AlertDialog.Builder(Main.this)
+								.setTitle(R.string.dialog_title)
+								.setMessage(R.string.dialog_question)
+								.setNegativeButton(R.string.dialog_no, null)
+								.setPositiveButton(R.string.dialog_yes,
+										new Dialog.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog,
+													int which) {
+
+												if (!NoteFileAdapter.deleteNote(selectedNote)) {
+													Toast.makeText(Main.this,
+															R.string.err_delete,
+															Toast.LENGTH_LONG).show();
+													return;
+												}
+												notes.remove(selectedNote);
+												((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
+											}
+										})
+								.show();
+						return false;
+					}
+				});
+	
+		menu.add(R.string.contextmenu_edit).setOnMenuItemClickListener(
+				new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						Intent intent = new Intent(Main.this, NoteEditor.class);
+						intent.putExtra("request", noteEditorRequest);
+						intent.putExtra("note", selectedNote);
+						startActivityForResult(intent, noteEditorRequest);
+						return false;
+					}
+				});
 	}
 	
 	@Override
@@ -197,51 +238,6 @@ public class Main extends Activity {
 							content.setMaxLines(l.getLineCount());
 						}
 					}
-
-					Button edit = (Button) v.findViewById(R.id.listItemEditButton);
-					edit.setTag(note);
-					edit.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Note note = (Note) v.getTag();
-							Intent intent = new Intent(Main.this, NoteEditor.class);
-							intent.putExtra("request", noteEditorRequest);
-							intent.putExtra("note", note);
-							startActivityForResult(intent, noteEditorRequest);
-						}
-					});
-
-					Button delete = (Button) v.findViewById(R.id.listItemDeleteButton);
-					delete.setTag(note);
-					delete.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							final Note note = (Note) v.getTag();
-
-							new AlertDialog.Builder(Main.this)
-									.setTitle(R.string.dialog_title)
-									.setMessage(R.string.dialog_question)
-									.setNegativeButton(R.string.dialog_no, null)
-									.setPositiveButton(R.string.dialog_yes,
-											new Dialog.OnClickListener() {
-												@Override
-												public void onClick(DialogInterface dialog,
-														int which) {
-
-													if (!NoteFileAdapter.deleteNote(note)) {
-														Toast.makeText(Main.this,
-																R.string.err_delete,
-																Toast.LENGTH_LONG).show();
-														return;
-													}
-													notes.remove(note);
-													notifyDataSetChanged();
-												}
-
-											})
-									.show();
-						}
-					});
 				}
 			}
 			return v;
