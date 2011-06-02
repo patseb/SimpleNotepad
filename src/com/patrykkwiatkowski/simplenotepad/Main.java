@@ -68,7 +68,7 @@ public class Main extends Activity {
 		});
 
 		notesListView = (ListView) findViewById(R.id.mainNotesListView);
-		notesListView.setAdapter(new MainNoteAdapter(this, notes));
+		notesListView.setAdapter(new NoteListViewAdapter(this, notes));
 		notesListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -206,41 +206,6 @@ public class Main extends Activity {
 				}
 			}
 			break;
-		}
-	}
-
-	private class MainNoteAdapter extends NoteListViewAdapter {
-		public MainNoteAdapter(Context context, ArrayList<Note> notes) {
-			super(context, notes);
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View v = super.getView(position, convertView, parent);
-
-			if (v != null) {
-				if (position >= 0 && position < notes.size()) {
-					Note note = notes.get(position);
-
-					TextView collapse = (TextView) v.findViewById(R.id.listItemCollapseTextView);
-					TextView content = (TextView) v.findViewById(R.id.listItemContentTextView);
-					Layout l = content.getLayout();
-
-					if ( l != null) {
-						if (note.getCollapsed() == 1) {
-							collapse.setVisibility(View.VISIBLE);
-							if (l.getLineCount() > 1) {
-								content.setMaxLines(1);
-							}
-						}
-						else {
-							collapse.setVisibility(View.INVISIBLE);
-							content.setMaxLines(l.getLineCount());
-						}
-					}
-				}
-			}
-			return v;
 		}
 	}
 }
