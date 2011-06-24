@@ -10,15 +10,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -65,20 +62,6 @@ public class Main extends Activity {
 
 		notesListView = (ListView) findViewById(R.id.mainNotesListView);
 		notesListView.setAdapter(new NoteListViewAdapter(this, notes));
-		notesListView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				selectedNote = (Note) notesListView.getItemAtPosition(position);
-
-				if (selectedNote.getCollapsed() == 1) {
-					notes.get(notes.indexOf(selectedNote)).setCollapsed(0);
-				}
-				else {
-					notes.get(notes.indexOf(selectedNote)).setCollapsed(1);
-				}
-				((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
-			}
-		});
 		registerForContextMenu(notesListView);
 	}
 
@@ -148,35 +131,6 @@ public class Main extends Activity {
 						return false;
 					}
 				});
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-
-		menu.add(R.string.optionmenu_collapse).setOnMenuItemClickListener(
-				new OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						for (int i=0; i<notes.size(); ++i)
-							notes.get(i).setCollapsed(1);
-						((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
-						return true;
-					}
-				});
-
-		menu.add(R.string.optionmenu_expand).setOnMenuItemClickListener(
-				new OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						for (int i=0; i<notes.size(); ++i)
-							notes.get(i).setCollapsed(0);
-						((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
-						return true;
-					}
-				});
-
-		return true;
 	}
 
 	@Override

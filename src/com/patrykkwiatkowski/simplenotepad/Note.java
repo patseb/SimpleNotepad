@@ -12,13 +12,6 @@ public class Note implements Parcelable {
 	private Date creationDate;
 	private String textContent;
 
-	/*
-	 * Integer instead of boolean because of Parcelable
-	 * 0 - not collapsed
-	 * 1 - collapsed
-	 */
-	private int collapsed;
-
 	public static final Parcelable.Creator<Note> CREATOR = new Creator<Note>() {
 		@Override
 		public Note createFromParcel(Parcel source) {
@@ -34,24 +27,19 @@ public class Note implements Parcelable {
 	public Note() {
 		creationDate = new Date();
 		textContent = "";
-		collapsed = 1;
 	}
 
 	public Note(String text) {
 		creationDate = new Date();
 		textContent = text;
-		collapsed = 1;
 	}
 
 	public Note(String text, Date date) {
 		creationDate = date;
 		textContent = text;
-		collapsed = 1;
 	}
 
 	protected Note(Parcel in) {
-		collapsed = in.readInt();
-
 		String date_str = in.readString();
 		try {
 			creationDate = new SimpleDateFormat(dateFormat).parse(date_str);
@@ -74,14 +62,6 @@ public class Note implements Parcelable {
 		this.textContent = textContent;
 	}
 
-	public void setCollapsed(int collapsed) {
-		this.collapsed = collapsed;
-	}
-
-	public int getCollapsed() {
-		return collapsed;
-	}
-
 	@Override
 	public int describeContents() {
 		return 0;
@@ -89,7 +69,6 @@ public class Note implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel out, int flags) {
-		out.writeInt(collapsed);
 		out.writeString(new SimpleDateFormat(dateFormat).format(creationDate));
 		out.writeString(textContent);
 	}

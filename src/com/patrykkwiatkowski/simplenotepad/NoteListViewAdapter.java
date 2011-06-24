@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class NoteListViewAdapter extends BaseAdapter {
+	static int maxLines = 5;
 	private ArrayList<Note> notes;
 	private LayoutInflater layout;
 
@@ -53,20 +54,17 @@ public class NoteListViewAdapter extends BaseAdapter {
 			TextView date = (TextView) v.findViewById(R.id.listItemCreationDateTextView);
 			TextView time = (TextView) v.findViewById(R.id.listItemCreationTimeTextView);
 			TextView content = (TextView) v.findViewById(R.id.listItemContentTextView);
-			TextView collapse = (TextView) v.findViewById(R.id.listItemCollapseTextView);
+			TextView toolong = (TextView) v.findViewById(R.id.listItemTooLongTextView);
 
 			date.setText(new SimpleDateFormat("yyyy.MM.dd").format(note.getCreationDate()));
 			time.setText(new SimpleDateFormat("kk:mm:ss").format(note.getCreationDate()));
 
 			content.setText(note.getTextContent());
-			if (note.getCollapsed() == 1) {
-				collapse.setVisibility(View.VISIBLE);
-				content.setMaxLines(1);
-			}
-			else {
-				collapse.setVisibility(View.INVISIBLE);
-				content.setMaxLines(Integer.MAX_VALUE);
-			}
+			content.setMaxLines(maxLines);
+			toolong.setVisibility(View.INVISIBLE);
+
+			if (note.getTextContent().split("\r\n|\r|\n").length > maxLines)
+				toolong.setVisibility(View.VISIBLE);
 		}
 
 		return v;
