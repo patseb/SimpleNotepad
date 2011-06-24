@@ -30,7 +30,7 @@ public class NoteEditor extends Activity {
 		editText = (EditText) findViewById(R.id.editNoteContentEditText);
 
 		Note note;
-		if (request.getInt("request") == Main.noteEditorRequest) {
+		if (request.getInt("request") == NoteList.noteEditorRequest) {
 			note = (Note) request.get("note");
 			editText.setText(note.getTextContent());
 		}
@@ -44,7 +44,7 @@ public class NoteEditor extends Activity {
 				Note note = (Note) v.getTag();
 				note.setTextContent(editText.getText().toString());
 
-				Intent intent = new Intent(NoteEditor.this, Main.class);
+				Intent intent = new Intent(NoteEditor.this, NoteList.class);
 				intent.putExtra("note", note);
 				NoteEditor.this.setIntent(intent);
 

@@ -27,7 +27,7 @@ import android.widget.Toast;
  * 
  * The user may manage the list of notes and create the new one.
  */
-public class Main extends Activity {
+public class NoteList extends Activity {
 	private Button createButton;
 	private ListView notesListView;
 	private ArrayList<Note> notes;
@@ -56,7 +56,7 @@ public class Main extends Activity {
 		createButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Main.this, NoteEditor.class);
+				Intent intent = new Intent(NoteList.this, NoteEditor.class);
 				intent.putExtra("request", noteCreateReqeust);
 				startActivityForResult(intent, noteCreateReqeust);
 			}
@@ -92,7 +92,7 @@ public class Main extends Activity {
 				new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						Intent intent = new Intent(Main.this, NoteViewer.class);
+						Intent intent = new Intent(NoteList.this, NoteViewer.class);
 						intent.putExtra("note", selectedNote);
 						startActivity(intent);
 						return true;
@@ -103,7 +103,7 @@ public class Main extends Activity {
 				new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						new AlertDialog.Builder(Main.this)
+						new AlertDialog.Builder(NoteList.this)
 								.setTitle(R.string.dialog_title)
 								.setMessage(R.string.dialog_question)
 								.setNegativeButton(R.string.dialog_no, null)
@@ -114,7 +114,7 @@ public class Main extends Activity {
 													int which) {
 
 												if (!NoteFileAdapter.deleteNote(selectedNote)) {
-													Toast.makeText(Main.this,
+													Toast.makeText(NoteList.this,
 															R.string.err_delete,
 															Toast.LENGTH_LONG).show();
 													return;
@@ -132,7 +132,7 @@ public class Main extends Activity {
 				new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						Intent intent = new Intent(Main.this, NoteEditor.class);
+						Intent intent = new Intent(NoteList.this, NoteEditor.class);
 						intent.putExtra("request", noteEditorRequest);
 						intent.putExtra("note", selectedNote);
 						startActivityForResult(intent, noteEditorRequest);
