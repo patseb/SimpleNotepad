@@ -15,7 +15,9 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -63,6 +65,12 @@ public class Main extends Activity {
 		notesListView = (ListView) findViewById(R.id.mainNotesListView);
 		notesListView.setAdapter(new NoteListViewAdapter(this, notes));
 		registerForContextMenu(notesListView);
+		notesListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				view.showContextMenu();
+			}
+		});
 	}
 
 	@Override
