@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">SimpleNotepad</string>
-	<string name="main_create">Create new note</string>
 	<string name="listitem_toolong">(...)</string>
 	<string name="err_not_mounted">External storage not mounted</string>
-	<string name="editenote_save">Save</string>
-	<string name="editenote_cancel">Cancel</string>
+	<string name="editenote_save">Save and clear</string>
 	<string name="viewnote_close">Close</string>
 	<string name="err_cant_notes">Can\'t create &quot;Notes&quot; directory</string>
 	<string name="err_cant_note">Can\'t create note file</string>

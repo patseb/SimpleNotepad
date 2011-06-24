@@ -3,6 +3,7 @@ package com.patrykkwiatkowski.simplenotepad;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,63 +12,70 @@ import android.widget.Toast;
 
 /**
  * Note editor activity.
- *
+ * 
  * The user may edit or create text content for note.
  */
 public class NoteEditor extends Activity {
 	private EditText editText;
 	private Button save;
-	private Button cancel;
+	private Note note;
+	private ApplicationController ac;
 
-	/** Called when the activity is first created. */
+	private void save() {
+		String text = editText.getText().toString();
+		if (text.length() > 0) {
+			int idx = 0;
+			note.setTextContent(text);
+			if (ac.getNotes().contains(note)) {
+				idx = ac.getNotes().indexOf(note);
+				ac.getNotes().remove(idx);
+			}
+			ac.getNotes().add(idx, note);
+			if (!NoteFileAdapter.saveNote(note)) {
+				Toast.makeText(this, R.string.err_creation, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.editnote);
 
 		Bundle request = this.getIntent().getExtras();
-
-		editText = (EditText) findViewById(R.id.editNoteContentEditText);
-
-		Note note;
-		if (request.getInt("request") == NoteList.noteEditorRequest) {
+		if (request != null && request.containsKey("note")) {
 			note = (Note) request.get("note");
-			editText.setText(note.getTextContent());
 		}
-		else note = new Note();
+		if (note == null) {
+			note = new Note();
+		}
 
+		ac = (ApplicationController) getApplicationContext();
+		editText = (EditText) findViewById(R.id.editNoteContentEditText);
+		editText.setText(note.getTextContent());
 		save = (Button) findViewById(R.id.editNoteSaveButton);
-		save.setTag(note);
 		save.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Note note = (Note) v.getTag();
-				note.setTextContent(editText.getText().toString());
-
-				Intent intent = new Intent(NoteEditor.this, NoteList.class);
-				intent.putExtra("note", note);
-				NoteEditor.this.setIntent(intent);
-
-				if (!NoteFileAdapter.saveNote(note)) {
-					Toast.makeText(NoteEditor.this, "lol?", Toast.LENGTH_LONG).show();
-					setResult(Activity.RESULT_CANCELED);
-				}
-				else {
-					setResult(Activity.RESULT_OK, intent);
-				}
-
-				finish();
+				save();
+				editText.setText("");
+				note = new Note();
 			}
 		});
+	}
 
-		cancel = (Button) findViewById(R.id.editNoteCancelButton);
-		cancel.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				setResult(Activity.RESULT_CANCELED);
-				finish();
-			}
-		});
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			startActivity(new Intent(this, NoteList.class));
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
+	@Override
+	public void onBackPressed() {
+		save();
+		super.onBackPressed();
 	}
 }

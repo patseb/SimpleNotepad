@@ -14,11 +14,9 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,39 +26,24 @@ import android.widget.Toast;
  * The user may manage the list of notes and create the new one.
  */
 public class NoteList extends Activity {
-	private Button createButton;
 	private ListView notesListView;
 	private ArrayList<Note> notes;
 	private Note selectedNote;
 	private ApplicationController AC;
-	public static final int noteEditorRequest = 1;
-	public static final int noteCreateReqeust = 2;
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.notelist);
 
-		AC = (ApplicationController)getApplicationContext();
+		AC = (ApplicationController) getApplicationContext();
 		notes = AC.getNotes();
-
 		selectedNote = null;
 
 		if (notes == null) {
 			Toast.makeText(this, R.string.err_read, Toast.LENGTH_LONG).show();
 			notes = new ArrayList<Note>();
 		}
-
-		createButton = (Button) findViewById(R.id.mainCreateButton);
-		createButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(NoteList.this, NoteEditor.class);
-				intent.putExtra("request", noteCreateReqeust);
-				startActivityForResult(intent, noteCreateReqeust);
-			}
-		});
 
 		notesListView = (ListView) findViewById(R.id.mainNotesListView);
 		notesListView.setAdapter(new NoteListViewAdapter(this, notes));
@@ -87,7 +70,7 @@ public class NoteList extends Activity {
 						return true;
 					}
 				});
-		
+
 		menu.add(R.string.contextmenu_show).setOnMenuItemClickListener(
 				new OnMenuItemClickListener() {
 					@Override
@@ -110,59 +93,38 @@ public class NoteList extends Activity {
 								.setPositiveButton(R.string.dialog_yes,
 										new Dialog.OnClickListener() {
 											@Override
-											public void onClick(DialogInterface dialog,
-													int which) {
+											public void onClick(DialogInterface dialog, int which) {
 
 												if (!NoteFileAdapter.deleteNote(selectedNote)) {
 													Toast.makeText(NoteList.this,
-															R.string.err_delete,
-															Toast.LENGTH_LONG).show();
+															R.string.err_delete, Toast.LENGTH_LONG)
+															.show();
 													return;
 												}
 												notes.remove(selectedNote);
-												((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
+												((NoteListViewAdapter) notesListView.getAdapter())
+														.notifyDataSetChanged();
 											}
 										})
 								.show();
 						return false;
 					}
 				});
-	
+
 		menu.add(R.string.contextmenu_edit).setOnMenuItemClickListener(
 				new OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						Intent intent = new Intent(NoteList.this, NoteEditor.class);
-						intent.putExtra("request", noteEditorRequest);
-						intent.putExtra("note", selectedNote);
-						startActivityForResult(intent, noteEditorRequest);
+						startActivity(new Intent(NoteList.this, NoteEditor.class).putExtra("note",
+								selectedNote));
 						return false;
 					}
 				});
 	}
 
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		switch (requestCode) {
-			case (noteCreateReqeust): {
-				if (resultCode == Activity.RESULT_OK) {
-					Note note = (Note) data.getParcelableExtra("note");
-					notes.add(0, note);
-					((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
-				}
-			}
-			break;
-
-			case (noteEditorRequest): {
-				if (resultCode == Activity.RESULT_OK) {
-					Note note = data.getParcelableExtra("note");
-					notes.get(notes.indexOf(note)).setTextContent(note.getTextContent());
-					((NoteListViewAdapter)notesListView.getAdapter()).notifyDataSetChanged();
-				}
-			}
-			break;
-		}
+	protected void onResume() {
+		((NoteListViewAdapter) notesListView.getAdapter()).notifyDataSetChanged();
+		super.onResume();
 	}
 }
