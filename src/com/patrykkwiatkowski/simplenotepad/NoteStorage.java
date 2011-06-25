@@ -83,13 +83,13 @@ public enum NoteStorage {
 					while ((line = buf.readLine()) != null) {
 						content += line + "\n";
 					}
-					if (content.length() > 0)
-						content = content.substring(0, content.length()-1);
+					if (content.length() > 0) content = content.substring(0, content.length() - 1);
 
 					fileIS.close();
 					buf.close();
 
-					Date creationDate = new SimpleDateFormat(getDateFormat()).parse(noteDir.getName());
+					Date creationDate = new SimpleDateFormat(getDateFormat()).parse(noteDir
+							.getName());
 
 					list.add(new Note(content, creationDate));
 				}
@@ -115,7 +115,8 @@ public enum NoteStorage {
 		}
 
 		try {
-			String noteDirName = new SimpleDateFormat(getDateFormat()).format(note.getCreationDate());
+			String noteDirName = new SimpleDateFormat(getDateFormat()).format(note
+					.getCreationDate());
 
 			File noteDir = new File(notesDir.getPath() + "/" + noteDirName);
 

@@ -63,11 +63,10 @@ public class NoteListViewAdapter extends BaseAdapter {
 			content.setMaxLines(maxLines);
 			toolong.setVisibility(View.INVISIBLE);
 
-			if (note.getTextContent().split("\r\n|\r|\n").length > maxLines)
-				toolong.setVisibility(View.VISIBLE);
+			if (note.getTextContent().split("\r\n|\r|\n").length > maxLines) toolong
+					.setVisibility(View.VISIBLE);
 		}
 
 		return v;
 	}
-
 }
