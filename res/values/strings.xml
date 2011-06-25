@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">SimpleNotepad</string>
+	<string name="activity_notelist">SimpleNotepad - List</string>
+	<string name="activity_noteeditor">SimpleNotepad - Edit</string>
+	<string name="activity_noteviewer">SimpleNotepad - View</string>
 	<string name="listitem_toolong">(...)</string>
 	<string name="editenote_save">Save and clear</string>
 	<string name="err_delete">Unable to delete note files</string>
