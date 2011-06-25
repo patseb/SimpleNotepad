@@ -5,8 +5,7 @@
 	<uses-sdk android:targetSdkVersion="8" android:minSdkVersion="8"></uses-sdk>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
-	<application android:icon="@drawable/icon" android:label="@string/app_name"
-		android:name="ApplicationController">
+	<application android:icon="@drawable/icon" android:label="@string/app_name">
 		<activity android:label="@string/app_name" android:name="NoteList"
 			android:launchMode="singleTop">
 		</activity>

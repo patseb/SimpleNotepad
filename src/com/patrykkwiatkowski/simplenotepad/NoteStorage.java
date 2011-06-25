@@ -17,10 +17,35 @@ import java.util.regex.Pattern;
 
 import android.os.Environment;
 
-public class NoteFileAdapter {
-	private static String dateFormat = "yyyy.MM.dd.kk.mm.ss";
+public enum NoteStorage {
+	INSTANCE;
 
-	public static ArrayList<Note> getNotes() {
+	public ArrayList<Note> notes;
+
+	public boolean save(Note note) {
+		int idx = 0;
+		if (notes.contains(note)) {
+			idx = notes.indexOf(note);
+			notes.remove(idx);
+		}
+		notes.add(idx, note);
+		return saveNote(note);
+	}
+
+	public boolean delete(Note note) {
+		notes.remove(note);
+		return deleteNote(note);
+	}
+
+	private NoteStorage() {
+		notes = getNotes();
+	}
+
+	private static String getDateFormat() {
+		return "yyyy.MM.dd.kk.mm.ss";
+	}
+
+	private static ArrayList<Note> getNotes() {
 		ArrayList<Note> list = new ArrayList<Note>();
 
 		if (!isMounted()) {
@@ -64,7 +89,7 @@ public class NoteFileAdapter {
 					fileIS.close();
 					buf.close();
 
-					Date creationDate = new SimpleDateFormat(dateFormat).parse(noteDir.getName());
+					Date creationDate = new SimpleDateFormat(getDateFormat()).parse(noteDir.getName());
 
 					list.add(new Note(content, creationDate));
 				}
@@ -76,7 +101,7 @@ public class NoteFileAdapter {
 		return list;
 	}
 
-	public static boolean saveNote(Note note) {
+	private static boolean saveNote(Note note) {
 		if (!isMounted()) {
 			return false;
 		}
@@ -90,7 +115,7 @@ public class NoteFileAdapter {
 		}
 
 		try {
-			String noteDirName = new SimpleDateFormat(dateFormat).format(note.getCreationDate());
+			String noteDirName = new SimpleDateFormat(getDateFormat()).format(note.getCreationDate());
 
 			File noteDir = new File(notesDir.getPath() + "/" + noteDirName);
 
@@ -118,13 +143,13 @@ public class NoteFileAdapter {
 		return true;
 	}
 
-	public static boolean deleteNote(Note note) {
+	private static boolean deleteNote(Note note) {
 		if (!isMounted()) {
 			return false;
 		}
 
 		File notesDir = Environment.getExternalStoragePublicDirectory("Notes");
-		String noteDirName = new SimpleDateFormat(dateFormat).format(note.getCreationDate());
+		String noteDirName = new SimpleDateFormat(getDateFormat()).format(note.getCreationDate());
 
 		try {
 			File noteDir = new File(notesDir + "/" + noteDirName);

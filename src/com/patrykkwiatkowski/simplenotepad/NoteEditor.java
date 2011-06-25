@@ -19,19 +19,12 @@ public class NoteEditor extends Activity {
 	private EditText editText;
 	private Button save;
 	private Note note;
-	private ApplicationController ac;
 
 	private void save() {
 		String text = editText.getText().toString();
 		if (text.length() > 0) {
-			int idx = 0;
 			note.setTextContent(text);
-			if (ac.getNotes().contains(note)) {
-				idx = ac.getNotes().indexOf(note);
-				ac.getNotes().remove(idx);
-			}
-			ac.getNotes().add(idx, note);
-			if (!NoteFileAdapter.saveNote(note)) {
+			if (!NoteStorage.INSTANCE.save(note)) {
 				Toast.makeText(this, R.string.err_creation, Toast.LENGTH_LONG).show();
 			}
 		}
@@ -50,7 +43,6 @@ public class NoteEditor extends Activity {
 			note = new Note();
 		}
 
-		ac = (ApplicationController) getApplicationContext();
 		editText = (EditText) findViewById(R.id.editNoteContentEditText);
 		editText.setText(note.getTextContent());
 		save = (Button) findViewById(R.id.editNoteSaveButton);

@@ -1,7 +1,5 @@
 package com.patrykkwiatkowski.simplenotepad;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,26 +25,23 @@ import android.widget.Toast;
  */
 public class NoteList extends Activity {
 	private ListView notesListView;
-	private ArrayList<Note> notes;
 	private Note selectedNote;
-	private ApplicationController AC;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.notelist);
 
-		AC = (ApplicationController) getApplicationContext();
-		notes = AC.getNotes();
 		selectedNote = null;
 
-		if (notes == null) {
+		if (NoteStorage.INSTANCE.notes == null) {
 			Toast.makeText(this, R.string.err_read, Toast.LENGTH_LONG).show();
-			notes = new ArrayList<Note>();
+			finish();
+			return;
 		}
 
 		notesListView = (ListView) findViewById(R.id.mainNotesListView);
-		notesListView.setAdapter(new NoteListViewAdapter(this, notes));
+		notesListView.setAdapter(new NoteListViewAdapter(this, NoteStorage.INSTANCE.notes));
 		registerForContextMenu(notesListView);
 		notesListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -94,14 +89,12 @@ public class NoteList extends Activity {
 										new Dialog.OnClickListener() {
 											@Override
 											public void onClick(DialogInterface dialog, int which) {
-
-												if (!NoteFileAdapter.deleteNote(selectedNote)) {
+												if (!NoteStorage.INSTANCE.delete(selectedNote)) {
 													Toast.makeText(NoteList.this,
 															R.string.err_delete, Toast.LENGTH_LONG)
 															.show();
 													return;
 												}
-												notes.remove(selectedNote);
 												((NoteListViewAdapter) notesListView.getAdapter())
 														.notifyDataSetChanged();
 											}
