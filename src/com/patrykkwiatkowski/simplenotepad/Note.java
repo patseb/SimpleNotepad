@@ -24,13 +24,28 @@ public class Note implements Parcelable {
 		}
 	};
 
+	private Date getCurrentDate() {
+		try {
+			/*
+			 * Round down the time so we dismiss microsecons and stuff we dont
+			 * care about. Otherwise we'll end up comparing same and yet
+			 * different Notes.
+			 */
+			return new SimpleDateFormat(dateFormat).parse(new SimpleDateFormat(dateFormat)
+					.format(new Date()));
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+
 	public Note() {
-		creationDate = new Date();
+		creationDate = getCurrentDate();
 		textContent = "";
 	}
 
 	public Note(String text) {
-		creationDate = new Date();
+		creationDate = getCurrentDate();
 		textContent = text;
 	}
 
@@ -81,5 +96,4 @@ public class Note implements Parcelable {
 	public static boolean equals(Note a, Note b) {
 		return a != null && b != null && a.creationDate.equals(b.creationDate);
 	}
-
 }
