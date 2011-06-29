@@ -23,6 +23,8 @@ public class NoteEditor extends Activity {
 	private void save() {
 		String text = editText.getText().toString();
 		if (text.length() > 0) {
+			if (note == null)
+				note = new Note();
 			note.setTextContent(text);
 			NoteStorage.INSTANCE.save(note, this);
 		}
@@ -37,19 +39,17 @@ public class NoteEditor extends Activity {
 		if (request != null && request.containsKey("note")) {
 			note = (Note) request.get("note");
 		}
-		if (note == null) {
-			note = new Note();
-		}
 
 		editText = (EditText) findViewById(R.id.editNoteContentEditText);
-		editText.setText(note.getTextContent());
+		if (note != null)
+			editText.setText(note.getTextContent());
 		save = (Button) findViewById(R.id.editNoteSaveButton);
 		save.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				save();
 				editText.setText("");
-				note = new Note();
+				note = null;
 			}
 		});
 	}
