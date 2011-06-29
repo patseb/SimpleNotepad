@@ -25,7 +25,7 @@ public class NoteEditor extends Activity {
 		if (text.length() > 0) {
 			if (note == null) note = new Note();
 			note.setTextContent(text);
-			NoteStorage.INSTANCE.save(note, new Runnable() {
+			NoteStorage.save(note, new Runnable() {
 				@Override
 				public void run() {
 					NoteEditor.this.runOnUiThread(new Runnable() {

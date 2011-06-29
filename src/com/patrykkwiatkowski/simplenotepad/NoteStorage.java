@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.Thread.State;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,22 +18,38 @@ import java.util.regex.Pattern;
 
 import android.os.Environment;
 
-public enum NoteStorage {
-	INSTANCE;
+public class NoteStorage {
+	private static ArrayList<Note> notes;
+	private static Thread preloader;
 
-	public ArrayList<Note> notes;
-	private LinkedList<Operation> operations;
-
-	private enum OperationType {
-		SAVE, DELETE
+	static {
+		preloader = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				getNotes();
+			}
+		});
+		preloader.start();
 	}
 
-	private class Operation extends Thread {
-		OperationType t;
-		Note n;
-		Runnable onfail;
+	private static class Operation extends Thread {
+		private Type t;
+		private Note n;
+		private Runnable onfail;
+		private static LinkedList<Operation> operations = new LinkedList<Operation>();
 
-		public Operation(OperationType t, Note n, Runnable onfail) {
+		public enum Type {
+			SAVE, DELETE
+		}
+
+		public static void add(Type t, Note n, Runnable r) {
+			synchronized (operations) {
+				operations.add(new Operation(t, n, r));
+				if (operations.getFirst().getState() == State.NEW) operations.getFirst().start();
+			}
+		}
+
+		public Operation(Type t, Note n, Runnable onfail) {
 			super();
 			this.t = t;
 			this.n = n;
@@ -61,49 +76,33 @@ public enum NoteStorage {
 		}
 	}
 
-	private void addOperation(OperationType t, Note n, Runnable r) {
-		synchronized (operations) {
-			operations.add(new Operation(t, n, r));
-			if (operations.getFirst().getState() == State.NEW) operations.getFirst().start();
-		}
-	}
-
-	public void save(Note note, Runnable r) {
+	public static void save(Note note, Runnable r) {
 		int idx = 0;
-		if (notes.contains(note)) {
-			idx = notes.indexOf(note);
-			notes.remove(idx);
+		if (getNotes().contains(note)) {
+			idx = getNotes().indexOf(note);
+			getNotes().remove(idx);
 		}
-		notes.add(idx, note);
-		addOperation(OperationType.SAVE, note, r);
+		getNotes().add(idx, note);
+		Operation.add(Operation.Type.SAVE, note, r);
 	}
 
-	public void delete(Note note, Runnable r) {
-		notes.remove(note);
-		addOperation(OperationType.DELETE, note, r);
+	public static void delete(Note note, Runnable r) {
+		getNotes().remove(note);
+		Operation.add(Operation.Type.DELETE, note, r);
 	}
 
-	private NoteStorage() {
-		notes = getNotes();
-		operations = new LinkedList<Operation>();
-	}
-
-	@Override
-	protected void finalize() throws Throwable {
-		synchronized (operations) {
-			while (operations.size() > 0) {
-				if (operations.getFirst().getState() != State.NEW) operations.getFirst().stop();
-				operations.remove();
-			}
+	public static ArrayList<Note> getNotes() {
+		synchronized (preloader) {
+			if (notes == null) notes = getNotesFromMedium();
 		}
-		super.finalize();
+		return notes;
 	}
 
 	private static String getDateFormat() {
 		return "yyyy.MM.dd.kk.mm.ss";
 	}
 
-	private static ArrayList<Note> getNotes() {
+	private static ArrayList<Note> getNotesFromMedium() {
 		ArrayList<Note> list = new ArrayList<Note>();
 
 		if (!isMounted()) {

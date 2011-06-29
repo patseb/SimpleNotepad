@@ -34,14 +34,14 @@ public class NoteList extends Activity {
 
 		selectedNote = null;
 
-		if (NoteStorage.INSTANCE.notes == null) {
+		if (NoteStorage.getNotes() == null) {
 			Toast.makeText(this, R.string.err_read, Toast.LENGTH_LONG).show();
 			finish();
 			return;
 		}
 
 		notesListView = (ListView) findViewById(R.id.mainNotesListView);
-		notesListView.setAdapter(new NoteListViewAdapter(this, NoteStorage.INSTANCE.notes));
+		notesListView.setAdapter(new NoteListViewAdapter(this, NoteStorage.getNotes()));
 		registerForContextMenu(notesListView);
 		notesListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -89,7 +89,7 @@ public class NoteList extends Activity {
 										new Dialog.OnClickListener() {
 											@Override
 											public void onClick(DialogInterface dialog, int which) {
-												NoteStorage.INSTANCE.delete(selectedNote,
+												NoteStorage.delete(selectedNote,
 														new Runnable() {
 															@Override
 															public void run() {
