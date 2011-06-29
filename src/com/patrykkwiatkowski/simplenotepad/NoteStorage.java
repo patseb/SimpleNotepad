@@ -7,38 +7,103 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.Thread.State;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.Activity;
 import android.os.Environment;
+import android.widget.Toast;
 
 public enum NoteStorage {
 	INSTANCE;
 
 	public ArrayList<Note> notes;
+	private LinkedList<Operation> operations;
 
-	public boolean save(Note note) {
+	private enum OperationType {
+		SAVE, DELETE
+	}
+
+	private class Operation extends Thread {
+		OperationType t;
+		Note n;
+		Activity a;
+
+		public Operation(OperationType t, Note n, Activity a) {
+			super();
+			this.t = t;
+			this.n = n;
+			this.a = a;
+		}
+
+		@Override
+		public void run() {
+			switch (t) {
+				case SAVE:
+					if (!NoteStorage.saveNote(n)) Toast.makeText(a, R.string.err_creation,
+							Toast.LENGTH_SHORT).show();
+					break;
+				case DELETE:
+					if (!NoteStorage.deleteNote(n)) Toast.makeText(a, R.string.err_delete,
+							Toast.LENGTH_SHORT).show();
+					break;
+			}
+			synchronized (operations) {
+				operations.remove(this);
+				if (operations.size() > 0) {
+					Operation op = operations.getFirst();
+					if (op.getState() == State.NEW)
+						op.start();
+				}
+			}
+		}
+	}
+
+	private void addOperation(OperationType t, Note n, Activity a) {
+		synchronized (operations) {
+			operations.add(new Operation(t, n, a));
+			if (operations.getFirst().getState() == State.NEW)
+				operations.getFirst().start();
+		}
+	}
+
+	public void save(Note note, Activity act) {
 		int idx = 0;
 		if (notes.contains(note)) {
 			idx = notes.indexOf(note);
 			notes.remove(idx);
 		}
 		notes.add(idx, note);
-		return saveNote(note);
+		addOperation(OperationType.SAVE, note, act);
 	}
 
-	public boolean delete(Note note) {
+	public void delete(Note note, Activity act) {
 		notes.remove(note);
-		return deleteNote(note);
+		addOperation(OperationType.DELETE, note, act);
 	}
 
 	private NoteStorage() {
 		notes = getNotes();
+		operations = new LinkedList<Operation>();
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		synchronized (operations) {
+			while (operations.size() > 0) {
+				if (operations.getFirst().getState() != State.NEW)
+					operations.getFirst().stop();
+				operations.remove();
+			}
+		}
+		super.finalize();
 	}
 
 	private static String getDateFormat() {

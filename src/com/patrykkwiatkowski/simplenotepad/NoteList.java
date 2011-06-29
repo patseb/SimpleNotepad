@@ -89,12 +89,7 @@ public class NoteList extends Activity {
 										new Dialog.OnClickListener() {
 											@Override
 											public void onClick(DialogInterface dialog, int which) {
-												if (!NoteStorage.INSTANCE.delete(selectedNote)) {
-													Toast.makeText(NoteList.this,
-															R.string.err_delete, Toast.LENGTH_LONG)
-															.show();
-													return;
-												}
+												NoteStorage.INSTANCE.delete(selectedNote, NoteList.this);
 												((NoteListViewAdapter) notesListView.getAdapter())
 														.notifyDataSetChanged();
 											}

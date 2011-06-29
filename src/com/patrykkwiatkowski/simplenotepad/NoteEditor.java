@@ -24,9 +24,7 @@ public class NoteEditor extends Activity {
 		String text = editText.getText().toString();
 		if (text.length() > 0) {
 			note.setTextContent(text);
-			if (!NoteStorage.INSTANCE.save(note)) {
-				Toast.makeText(this, R.string.err_creation, Toast.LENGTH_LONG).show();
-			}
+			NoteStorage.INSTANCE.save(note, this);
 		}
 	}
 
