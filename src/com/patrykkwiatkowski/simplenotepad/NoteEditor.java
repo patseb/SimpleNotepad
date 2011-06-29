@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Note editor activity.
@@ -22,10 +23,20 @@ public class NoteEditor extends Activity {
 	private void save() {
 		String text = editText.getText().toString();
 		if (text.length() > 0) {
-			if (note == null)
-				note = new Note();
+			if (note == null) note = new Note();
 			note.setTextContent(text);
-			NoteStorage.INSTANCE.save(note, this);
+			NoteStorage.INSTANCE.save(note, new Runnable() {
+				@Override
+				public void run() {
+					NoteEditor.this.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							Toast.makeText(NoteEditor.this, R.string.err_creation,
+									Toast.LENGTH_SHORT).show();
+						}
+					});
+				}
+			});
 		}
 	}
 
@@ -40,8 +51,7 @@ public class NoteEditor extends Activity {
 		}
 
 		editText = (EditText) findViewById(R.id.editNoteContentEditText);
-		if (note != null)
-			editText.setText(note.getTextContent());
+		if (note != null) editText.setText(note.getTextContent());
 		save = (Button) findViewById(R.id.editNoteSaveButton);
 		save.setOnClickListener(new OnClickListener() {
 			@Override

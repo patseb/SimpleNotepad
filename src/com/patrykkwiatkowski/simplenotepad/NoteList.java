@@ -89,7 +89,23 @@ public class NoteList extends Activity {
 										new Dialog.OnClickListener() {
 											@Override
 											public void onClick(DialogInterface dialog, int which) {
-												NoteStorage.INSTANCE.delete(selectedNote, NoteList.this);
+												NoteStorage.INSTANCE.delete(selectedNote,
+														new Runnable() {
+															@Override
+															public void run() {
+																NoteList.this
+																		.runOnUiThread(new Runnable() {
+																			@Override
+																			public void run() {
+																				Toast.makeText(
+																						NoteList.this,
+																						R.string.err_delete,
+																						Toast.LENGTH_SHORT)
+																						.show();
+																			}
+																		});
+															}
+														});
 												((NoteListViewAdapter) notesListView.getAdapter())
 														.notifyDataSetChanged();
 											}

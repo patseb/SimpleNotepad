@@ -17,9 +17,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.app.Activity;
 import android.os.Environment;
-import android.widget.Toast;
 
 public enum NoteStorage {
 	INSTANCE;
@@ -34,59 +32,55 @@ public enum NoteStorage {
 	private class Operation extends Thread {
 		OperationType t;
 		Note n;
-		Activity a;
+		Runnable onfail;
 
-		public Operation(OperationType t, Note n, Activity a) {
+		public Operation(OperationType t, Note n, Runnable onfail) {
 			super();
 			this.t = t;
 			this.n = n;
-			this.a = a;
+			this.onfail = onfail;
 		}
 
 		@Override
 		public void run() {
 			switch (t) {
 				case SAVE:
-					if (!NoteStorage.saveNote(n)) Toast.makeText(a, R.string.err_creation,
-							Toast.LENGTH_SHORT).show();
+					if (!NoteStorage.saveNote(n)) onfail.run();
 					break;
 				case DELETE:
-					if (!NoteStorage.deleteNote(n)) Toast.makeText(a, R.string.err_delete,
-							Toast.LENGTH_SHORT).show();
+					if (!NoteStorage.deleteNote(n)) onfail.run();
 					break;
 			}
 			synchronized (operations) {
 				operations.remove(this);
 				if (operations.size() > 0) {
 					Operation op = operations.getFirst();
-					if (op.getState() == State.NEW)
-						op.start();
+					if (op.getState() == State.NEW) op.start();
 				}
 			}
 		}
 	}
 
-	private void addOperation(OperationType t, Note n, Activity a) {
+	private void addOperation(OperationType t, Note n, Runnable r) {
 		synchronized (operations) {
-			operations.add(new Operation(t, n, a));
-			if (operations.getFirst().getState() == State.NEW)
-				operations.getFirst().start();
+			operations.add(new Operation(t, n, r));
+			if (operations.getFirst().getState() == State.NEW) operations.getFirst().start();
 		}
 	}
 
-	public void save(Note note, Activity act) {
+	public void save(Note note, Runnable r) {
 		int idx = 0;
 		if (notes.contains(note)) {
 			idx = notes.indexOf(note);
 			notes.remove(idx);
 		}
 		notes.add(idx, note);
-		addOperation(OperationType.SAVE, note, act);
+		addOperation(OperationType.SAVE, note, r);
 	}
 
-	public void delete(Note note, Activity act) {
+	public void delete(Note note, Runnable r) {
 		notes.remove(note);
-		addOperation(OperationType.DELETE, note, act);
+		addOperation(OperationType.DELETE, note, r);
 	}
 
 	private NoteStorage() {
@@ -98,8 +92,7 @@ public enum NoteStorage {
 	protected void finalize() throws Throwable {
 		synchronized (operations) {
 			while (operations.size() > 0) {
-				if (operations.getFirst().getState() != State.NEW)
-					operations.getFirst().stop();
+				if (operations.getFirst().getState() != State.NEW) operations.getFirst().stop();
 				operations.remove();
 			}
 		}
