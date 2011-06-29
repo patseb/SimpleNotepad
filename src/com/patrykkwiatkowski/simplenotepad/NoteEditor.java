@@ -24,6 +24,7 @@ public class NoteEditor extends Activity {
 		String text = editText.getText().toString();
 		if (text.length() > 0) {
 			if (note == null) note = new Note();
+			if (note.getTextContent() == text) return;
 			note.setTextContent(text);
 			NoteStorage.save(note, new Runnable() {
 				@Override
