@@ -30,10 +30,10 @@
 		<TextView android:layout_marginLeft="10dip"
 			android:layout_marginRight="10dip" android:id="@+id/listItemTooLongTextView"
 			android:layout_width="wrap_content" android:layout_marginBottom="2px"
-			android:gravity="center" android:text="@string/listitem_toolong"
+			android:text="@string/listitem_toolong"
 			android:layout_alignParentBottom="true"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true" android:layout_height="match_parent"
-			android:layout_margin="0px"></TextView>
+			android:layout_margin="0px" android:gravity="bottom|center"></TextView>
 	</LinearLayout>
 </LinearLayout>
