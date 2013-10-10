@@ -23,6 +23,7 @@ import android.widget.Toast;
  * 
  * The user may manage the list of notes and create the new one.
  */
+@SuppressWarnings("deprecation")
 public class NoteList extends Activity {
 	private ListView notesListView;
 	private Note selectedNote;
