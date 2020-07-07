@@ -1,0 +1,77 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitattributes
+* .gitignore
+* LICENSE
+* README
+* app\
+* app\v1.0.1\
+* app\v1.0.1\SimpleNotepad.apk
+* app\v1.0\
+* app\v1.0\SimpleNotepad.apk
+* app\v1.1.1\
+* app\v1.1.1\SimpleNotepad.apk
+* app\v1.1.2\
+* app\v1.1.2\SimpleNotepad.apk
+* app\v1.1.3\
+* app\v1.1.3\SimpleNotepad.apk
+* app\v1.1.4\
+* app\v1.1.4\SimpleNotepad.apk
+* app\v1.1\
+* app\v1.1\SimpleNotepad.apk
+* app\v2.0\
+* app\v2.0\SimpleNotepad.apk
+* default.properties
+* proguard.cfg
+* screenshots\
+* screenshots\v1.0\
+* screenshots\v1.0\main-empty.png
+* screenshots\v1.0\main-note.png
+* screenshots\v1.0\noteeditor.png
+* screenshots\v1.1.1\
+* screenshots\v1.1.1\main-filled.png
+* screenshots\v1.1.1\noteviewer.png
+* screenshots\v1.1.4\
+* screenshots\v1.1.4\contextmenu.png
+* screenshots\v1.1.4\main-filled.png
+* screenshots\v1.1.4\noteeditor.png
+* screenshots\v1.1\
+* screenshots\v1.1\main-contextmenu.png
+* screenshots\v1.1\main-empty.png
+* screenshots\v1.1\main-filled.png
+* screenshots\v1.1\noteeditor.png
+* screenshots\v1.1\noteviewer.png
+* screenshots\v2.0\
+* screenshots\v2.0\list-filled.png
+* screenshots\v2.0\noteeditor.png
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

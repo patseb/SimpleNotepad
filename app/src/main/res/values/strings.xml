@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">SimpleNotepad</string>
+	<string name="activity_notelist">SimpleNotepad - List</string>
+	<string name="activity_noteeditor">SimpleNotepad - Edit</string>
+	<string name="activity_noteviewer">SimpleNotepad - View</string>
+	<string name="listitem_toolong">(...)</string>
+	<string name="editenote_save">Save and clear</string>
+	<string name="editenote_all">\u22ee</string>
+	<string name="err_delete">Unable to delete note files</string>
+	<string name="err_read">Notes read error</string>
+	<string name="err_creation">Unable to create note</string>
+	<string name="dialog_title">Delete confirm</string>
+	<string name="dialog_question">Are you sure?</string>
+	<string name="dialog_yes">Yes</string>
+	<string name="dialog_no">No</string>
+	<string name="contextmenu_copy">Copy text</string>
+	<string name="contextmenu_show">Show</string>
+	<string name="contextmenu_delete">Delete</string>
+	<string name="contextmenu_edit">Edit</string>
+	<color name="listitem_textcolor">#FFFFFF</color>
+	<color name="listitem_linkcolor">#99CCFF</color>
+	<color name="listitem_selected">#1E90FF</color>
+	<color name="listitem_normal">#000000</color>
+	<color name="listitem_divider">#555555</color>
+	<color name="listitem_bg">#000000</color>
+</resources>
