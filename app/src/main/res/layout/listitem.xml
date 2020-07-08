@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent" android:layout_height="match_parent"
 	android:background="@drawable/listitem_selector" android:paddingTop="4dip"
 	android:paddingBottom="4dip" android:paddingLeft="2px"
@@ -10,12 +11,14 @@
 			android:id="@+id/listItemCreationDateTextView" android:layout_width="wrap_content"
 			android:gravity="center_vertical" android:layout_height="wrap_content"
 			android:text="TextView" android:focusable="false"
-			android:layout_alignParentLeft="true"></TextView>
+			android:layout_alignParentLeft="true"
+			tools:ignore="UnknownId"></TextView>
 		<TextView android:id="@+id/listItemCreationTimeTextView"
 			android:layout_toLeftOf="@+id/listItemDeleteButton" android:gravity="center_vertical"
 			android:text="TextView" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:focusable="false"
-			android:layout_alignParentRight="true"></TextView>
+			android:layout_alignParentRight="true"
+			tools:ignore="UnknownId"></TextView>
 	</RelativeLayout>
 	<LinearLayout android:id="@+id/linearLayout1"
 		android:layout_height="match_parent" android:layout_width="match_parent">

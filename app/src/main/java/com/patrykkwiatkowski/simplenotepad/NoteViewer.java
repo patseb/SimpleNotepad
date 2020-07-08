@@ -20,9 +20,9 @@ public class NoteViewer extends Activity {
 		Bundle request = this.getIntent().getExtras();
 		Note note = (Note) request.get("note");
 
-		contentTextView = (TextView) findViewById(R.id.viewNoteContentTextView);
-		dateTextView = (TextView) findViewById(R.id.viewNoteDateTextView);
-		timeTextView = (TextView) findViewById(R.id.viewNoteTimeTextView);
+		contentTextView = findViewById(R.id.viewNoteContentTextView);
+		dateTextView = findViewById(R.id.viewNoteDateTextView);
+		timeTextView = findViewById(R.id.viewNoteTimeTextView);
 
 		contentTextView.setText(note.getTextContent());
 		dateTextView.setText(new SimpleDateFormat("yyyy-MM-dd").format(note.getCreationDate()));

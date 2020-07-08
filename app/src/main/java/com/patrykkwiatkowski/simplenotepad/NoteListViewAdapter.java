@@ -51,10 +51,10 @@ public class NoteListViewAdapter extends BaseAdapter {
 
 		if (position >= 0 && position < notes.size()) {
 			Note note = notes.get(position);
-			TextView date = (TextView) v.findViewById(R.id.listItemCreationDateTextView);
-			TextView time = (TextView) v.findViewById(R.id.listItemCreationTimeTextView);
-			TextView content = (TextView) v.findViewById(R.id.listItemContentTextView);
-			TextView toolong = (TextView) v.findViewById(R.id.listItemTooLongTextView);
+			TextView date = v.findViewById(R.id.listItemCreationDateTextView);
+			TextView time = v.findViewById(R.id.listItemCreationTimeTextView);
+			TextView content = v.findViewById(R.id.listItemContentTextView);
+			TextView toolong = v.findViewById(R.id.listItemTooLongTextView);
 
 			date.setText(new SimpleDateFormat("yyyy.MM.dd").format(note.getCreationDate()));
 			time.setText(new SimpleDateFormat("kk:mm:ss").format(note.getCreationDate()));

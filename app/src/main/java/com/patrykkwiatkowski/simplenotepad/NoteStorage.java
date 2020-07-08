@@ -134,8 +134,8 @@ public class NoteStorage {
 					FileInputStream fileIS = new FileInputStream(noteText);
 					BufferedReader buf = new BufferedReader(new InputStreamReader(fileIS));
 
-					String line = new String();
-					String content = new String();
+					String line = "";
+					String content = "";
 
 					while ((line = buf.readLine()) != null) {
 						content += line + "\n";
@@ -224,10 +224,7 @@ public class NoteStorage {
 	}
 
 	private static boolean isMounted() {
-		if (android.os.Environment.getExternalStorageState().compareTo(
-				android.os.Environment.MEDIA_MOUNTED) == 1) {
-			return false;
-		}
-		return true;
+		return Environment.getExternalStorageState().compareTo(
+				Environment.MEDIA_MOUNTED) != 1;
 	}
 }

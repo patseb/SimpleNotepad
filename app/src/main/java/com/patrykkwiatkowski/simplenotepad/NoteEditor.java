@@ -52,10 +52,9 @@ public class NoteEditor extends Activity {
 			note = (Note) request.get("note");
 		}
 
-		editText = (EditText) findViewById(R.id.editNoteContentEditText);
+		editText = findViewById(R.id.editNoteContentEditText);
 		if (note != null) editText.setText(note.getTextContent());
-
-		save = (Button) findViewById(R.id.editNoteSaveButton);
+		save = findViewById(R.id.editNoteSaveButton);
 		save.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -65,14 +64,13 @@ public class NoteEditor extends Activity {
 			}
 		});
 
-		all = (Button) findViewById(R.id.editNoteAllButton);
+		all = findViewById(R.id.editNoteViewAllButton);
 		all.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(NoteEditor.this, NoteList.class));
 			}
 		});
-
 	}
 
 	@Override

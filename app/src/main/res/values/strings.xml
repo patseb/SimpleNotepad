@@ -6,7 +6,7 @@
 	<string name="activity_noteviewer">SimpleNotepad - View</string>
 	<string name="listitem_toolong">(...)</string>
 	<string name="editenote_save">Save and clear</string>
-	<string name="editenote_all">\u22ee</string>
+	<string name="editenote_viewall">\u22ee</string>
 	<string name="err_delete">Unable to delete note files</string>
 	<string name="err_read">Notes read error</string>
 	<string name="err_creation">Unable to create note</string>

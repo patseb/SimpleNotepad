@@ -41,7 +41,7 @@ public class NoteList extends Activity {
 			return;
 		}
 
-		notesListView = (ListView) findViewById(R.id.mainNotesListView);
+		notesListView = findViewById(R.id.mainNotesListView);
 		notesListView.setAdapter(new NoteListViewAdapter(this, NoteStorage.getNotes()));
 		registerForContextMenu(notesListView);
 		notesListView.setOnItemClickListener(new OnItemClickListener() {
